@@ -10,6 +10,8 @@
     <modules>
         <module>helloworld</module>
         <module>01_spring_initializr</module>
+        <module>05_springboot_logging</module>
+        <module>05_springboot_logging_2</module>
     </modules>
 
     <properties>
