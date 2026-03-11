@@ -1,0 +1,19 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /yangfei
+
+
+#user:
+#  username: 杨非dev
+#  age: 40
+#  birthday: 1986/01/01
+#  hobbies:
+#    - 羽毛球
+#    - 跑步
+#  girlfriend:
+#    18: AAA
+#    20: BBB
+#  address:
+#    id: 1
+#    desc: ${user.username}的家南宁

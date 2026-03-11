@@ -1,0 +1,54 @@
+<configuration>
+    <springProperty scope="context" name = "dateformat" source="logging.pattern.dateformat"
+                    defaultValue = "-yyyy-MM-dd HH:mm:ss"/>
+    <!-- appender 追加器 日志以那种方式进行输出
+            name    取名
+            class   不同实现类会输出到不同地方
+            ch.qos.logback.core.ConsoleAppender 输出到控制台
+            ch.qos.logback.core.FileAppender    文件保存
+    -->
+<!--    <appender name = "STDOUT" class="ch.qos.logback.core.ConsoleAppender">  -->
+<!--    <appender name = "FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>d:/log2/log</file>-->
+<!--        <append>true</append>-->
+    <appender name = "RFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>d:/rlog/yf.log</file>
+        <rollingPolicy class = "ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>d:/rlog/tests.%i.log.zip</fileNamePattern>
+<!--            <minIndex>1</minIndex>-->
+<!--&lt;!&ndash;            保存3个后覆盖最早日志&ndash;&gt;-->
+<!--            <maxIndex>3</maxIndex>-->
+        </rollingPolicy>
+
+<!--        每个保存文件大小-->
+        <triggeringPolicy class = "ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>5KB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder>
+            <!-- 格式 依照加载springProfile文件确定输出格式-->
+            <springProfile name ="dev">
+                <pattern>
+                    %d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{100}-%msg%n
+                </pattern>
+            </springProfile>
+
+            <springProfile name ="!dev">
+                <pattern>
+                    %d{${dateformat}} %-5level [%thread] %logger{100}++++++%msg%n
+                </pattern>
+            </springProfile>
+        </encoder>
+    </appender>
+
+    <!-- com.yf -->
+    <!-- 控制跟细颗粒度的日志级别  根据包\根据类 -->
+    <logger name = "com.yf" level="trace"></logger>
+
+    <root level = "error">
+<!--         当前日志级别输出到那个追加器上面 -->
+<!--        <appender-ref ref = "STDOUT" />-->
+        <appender-ref ref = "RFILE" />
+    </root>
+
+</configuration>

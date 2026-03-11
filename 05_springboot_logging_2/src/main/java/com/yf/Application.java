@@ -18,10 +18,12 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
 
+        System.out.println(logger.getClass());
         logger.trace("跟踪");
         logger.debug("调试");
         logger.info("信息");
         logger.warn("警告");
+        logger.warn("警告2");
         logger.error("异常");
     }
 }
