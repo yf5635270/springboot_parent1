@@ -65,4 +65,14 @@ public class OrderControoler {
             defaultClient.put().uri("http://localhost:8080/yangfei/user/editUser",user).contentType(MediaType.APPLICATION_JSON).body(user).retrieve().body(MyResult.class);
         return response.toString();
     }
+
+
+    @RequestMapping("del")
+    public String del(){
+        Integer id = 3;
+        MyResult response =
+                defaultClient.delete().uri("http://localhost:8080/yangfei/user/{id}",id).retrieve().body(MyResult.class);
+
+        return response.toString();
+    }
 }

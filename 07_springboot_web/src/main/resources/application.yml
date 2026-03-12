@@ -2,6 +2,24 @@ server:
   port: 8080
   servlet:
     context-path: /yangfei
+
+
+#通过属性设置确定扫描静态路径地址
+spring:
+#  web:
+#    resources:
+#      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/
+
+  mvc:
+    view:
+      suffix: .html
+      prefix: /pages/
+
+
+#  mvc:
+#    format:
+#      date: yyyy/MM/dd
+
 #
 #spring:
 #  profiles:
@@ -23,3 +41,4 @@ server:
 #      max-file-size: 2KB
 ##    path: D:/
 #
+
