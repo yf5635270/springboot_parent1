@@ -1,5 +1,6 @@
 package com.yf;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author 杨非
  * @date 2026年03月11日 09:54
  */
-@SpringBootApplication
+@SpringBootApplication()
 public class Application07 {
 
     public static void main(String[] args) {

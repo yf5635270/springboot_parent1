@@ -1,11 +1,13 @@
 package com.yf.entity;
 
+
 import java.util.Date;
 
 /**
  * @author 杨非
  * @date 2026年03月11日 10:00
  */
+
 public class User {
     private Integer id;
     private String username;

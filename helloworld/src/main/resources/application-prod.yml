@@ -1,12 +1,12 @@
 server:
   port: 8089
-  servlet:
-    context-path: /yangfei
+#  servlet:
+#    context-path: /yangfei89
 
 
 
-user:
-  username: 杨非prod
-  age: 40
-  birthday: 1月9日
-  address: 内街
+#user:
+#  username: 杨非prod
+#  age: 40
+#  birthday: 1月9日
+#  address: 内街

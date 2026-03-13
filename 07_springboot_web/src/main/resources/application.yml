@@ -1,7 +1,7 @@
 server:
   port: 8080
-  servlet:
-    context-path: /yangfei
+#  servlet:
+#    context-path: /yangfei
 
 
 #通过属性设置确定扫描静态路径地址
@@ -10,10 +10,21 @@ spring:
 #    resources:
 #      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/
 
-  mvc:
-    view:
-      suffix: .html
-      prefix: /pages/
+#  mvc:
+#    view:
+#      suffix: .html
+#      prefix: /pages/
+
+#mysql链接属性
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: yangfei
+
+mybatis:
+  type-aliases-package: com.yf.entity
+  mapper-locations: classpath*:mapper/*Mapper.xml
 
 
 #  mvc:
