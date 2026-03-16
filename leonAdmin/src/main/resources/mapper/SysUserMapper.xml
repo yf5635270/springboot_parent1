@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yf.leonadmin.mapper.SysUserMapper">
+    <select id="getById" resultType="com.yf.leonadmin.entity.SysUser">
+        select * from sys_user where 1=1
+        <if test="id!=null">
+            and id = #{id}
+        </if>
+    </select>
+
+    <insert id="insertSysUser" parameterType="com.yf.leonadmin.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user (username,userpwd,name,sex,tel,headurl)
+        values (#{username},#{userpwd},#{name},#{sex},#{tel},#{headurl})
+    </insert>
+</mapper>
