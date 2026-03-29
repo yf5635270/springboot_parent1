@@ -11,8 +11,41 @@
         </if>
     </select>
 
-    <insert id="insertSysUser" parameterType="com.yf.leonadmin.entity.SysUser" useGeneratedKeys="true" keyProperty="id">
+<!--    查询用户列表-->
+    <select id="getList" resultType="com.yf.leonadmin.entity.SysUser">
+        select * from sys_user where 1=1
+        <if test="id!=null">
+            and id = #{id}
+        </if>
+    </select>
+
+<!--    查询重复账号-->
+    <select id="selCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(id) from sys_user where username = #{username}
+
+    </select>
+
+<!--    添加用户信息-->
+    <insert id="insertSysUser" parameterType="com.yf.leonadmin.entity.SysUser"  useGeneratedKeys="true" keyProperty="id">
         insert into sys_user (username,userpwd,name,sex,tel,headurl)
         values (#{username},#{userpwd},#{name},#{sex},#{tel},#{headurl})
     </insert>
+
+<!--    更新用户信息-->
+    <update id="updateSysUser" parameterType="com.yf.leonadmin.entity.SysUser" >
+        update sys_user
+        set name = #{name},sex=#{sex},tel=#{tel},headurl=#{headurl}
+        where 1=1
+        <if test="id!=null">
+           and id = #{id}
+        </if>
+        <if test="username!=null">
+            and username = #{username}
+        </if>
+    </update>
+
+<!--    删除用户信息-->
+    <delete id="delSysUser" parameterType="java.lang.String" >
+        delete * from sys_user where id= #{id}
+    </delete>
 </mapper>

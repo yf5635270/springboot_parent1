@@ -10,7 +10,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/leondb?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/leondb?allowPublicKeyRetrieval=true&useSSL=true&serverTimezone=UTC
     username: root
     password: yangfei
     type: com.alibaba.druid.pool.DruidDataSource      #数据库连接池
@@ -23,8 +23,66 @@ spring:
       test-on-borrow: true              #申请链接时执行validationquery
       test-wile-idle: true              #申请连接如果空闲时间大于timeBetweenEvictionRunsMillis
       test-on-return: false             #归还链接时执行validationQuery检测链接是否有效，默认false,开启后会减低性能，因为每次归还连接时，都会先执行验证 SQL。如果验证失败，该连接会被丢弃并创建一个新连接，而不是放入空闲池中
+  rabbitmq:
+    host: 192.168.10.101
+    username: guest
+    password: guest
+    virtual-host: /
+    port: 5672
+    listener:
+      simple:
+        #消费者最小数量
+        concurrency: 10
+        #消费者最大数量
+        max-concurrency: 10
+        #每次只处理一条信息
+        prefetch: 1
+        #启动时是否默认启动容器，默认TRUE
+        auto-startup: true
+        #被拒绝时重新进入队列
+        default-requeue-rejected: true
+    template:
+      retry:
+        #发布充实，默认false
+        enabled: true
+        #重试时间默认1000毫秒
+        initial-interval: 1000ms
+        #重试最大次数，默认3
+        max-attempts: 3
+        #重试最大间隔时间，默认10000毫秒
+        max-interval: 10000ms
+        #重试间隔，每次翻倍
+        multiplier: 1
 
-
+#mybatis配置
 mybatis:
-  type-aliases-package: com.yf.leonadmin.entity
-  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl     #SQL控制台输出
+  type-aliases-package: com.yf.leonadmin.entity               #类实体路径
+  mapper-locations: classpath*:mapper/*Mapper.xml             #XML路径
+
+
+
+
+
+
+
+#springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.yf.leonadmin.controller
+
+#增强配置
+knife4j:
+    enable: true
+    setting:
+      language: zh_cn
+      swagger-model-name: 实体类列表
